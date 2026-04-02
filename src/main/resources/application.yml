@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: smart-campus-visitor-system
+  datasource:
+    url: jdbc:mysql://localhost:3306/smart_campus?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: ZYH20040628
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  type-aliases-package: com.smartcampus.**.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+# JWT 配置
+jwt:
+  # 使用 JwtKeyGenerator 生成的密钥（至少 512 bits）
+  secret: WZ4x3IwnJn/+x5dXacc/WGd/YtQ0TcaDxPJHISG1nhJTYAbQ3fnwXRxjOvDCHuhNYKM6Y3jfeL1gFwocq3lKeQ==
+  # Token 过期时间（秒），默认 24 小时
+  expiration: 86400
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.smartcampus: DEBUG
+  file:
+    name: logs/application.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
